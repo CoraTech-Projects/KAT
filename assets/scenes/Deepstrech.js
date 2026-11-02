@@ -140,7 +140,7 @@ window.katQuestFollowUp({
             {
                 from: ben,
                 to: gato,
-                about: "Boa, KAT! Você usou OU corretamente: o fragmento ou minha autorização já permite abrir o portal."
+                about: "Boa, KAT! Com SE e SENÃO o programa decidiu sozinho: fragmento coletado, portal liberado."
             },
             {
                 from: ben,
@@ -152,7 +152,7 @@ window.katQuestFollowUp({
             {
                 from: piona,
                 to: gato,
-                about: "Muito bem! Com OU, o portal abre quando o fragmento foi encontrado ou quando Ben autorizou a passagem."
+                about: "Muito bem! Se o fragmento foi coletado, o portal abre; senão, eu mostraria uma dica."
             }
         ]
 });
@@ -165,7 +165,7 @@ window.katQuestFollowUp({
         {
             from: piona,
             to: gato,
-            about: "Os quatro fragmentos foram inseridos na ordem certa e o programa foi executado."
+            about: "Você juntou todas as peças num algoritmo completo! Os quatro fragmentos formaram o programa."
         },
         ...(assets.get("have-ben") ? [
             {

@@ -1,20 +1,21 @@
 (() => {
     const challengeData = [
         {
-            title: "NPC inválido",
-            concept: "Sequência e variáveis",
-            intro: "O NPC que está com o arquivo se corrompeu. Guarde o nome do alvo em uma variável e complete a sequência de comandos para reiniciá-lo e mostrá-lo.",
-            feedback: "Boa! Você guardou o alvo e executou os comandos na ordem certa.",
+            title: "O primeiro algoritmo",
+            concept: "Conceito de algoritmo",
+            intro: "Um algoritmo é uma sequência de passos, em uma ordem definida, para resolver um problema, como uma receita. O NPC que guarda o arquivo travou. Dê o nome certo à estrutura e complete os passos na ordem para que ele volte a aparecer.",
+            feedback: "Isso! Você escreveu seu primeiro algoritmo: passos simples, na ordem certa, resolvendo um problema.",
             mode: "fill",
             template: [
+                { label: "", answer: "ALGORITMO", suffix: " \"reiniciar_npc\"", options: ["FIM", "ALGORITMO", "SENÃO"] },
                 "INICIO",
-                { label: "alvo <- ", answer: "\"NPC\"", options: ["\"NPC\"", "\"GATO\"", "\"BEN\""] },
-                { label: "REINICIAR(", answer: "alvo", suffix: ")", options: ["GATO", "alvo", "BEN"] },
-                { label: "MOSTRAR(", answer: "alvo", suffix: ")", options: ["BEN", "alvo", "GATO"] },
-                "FIM"
+                { label: "    ", answer: "LOCALIZAR_NPC", options: ["MOSTRAR_NPC", "LOCALIZAR_NPC", "APAGAR_NPC"] },
+                "    REINICIAR_NPC",
+                { label: "    ", answer: "MOSTRAR_NPC", options: ["LOCALIZAR_NPC", "APAGAR_NPC", "MOSTRAR_NPC"] },
+                "FIMALGORITMO"
             ],
             effect: "O NPC apareceu! O arquivo pode ser pego.",
-            hint: "Guarde \"NPC\" em alvo e use essa variável nos dois comandos, na ordem REINICIAR e depois MOSTRAR.",
+            hint: "Todo programa começa com a palavra ALGORITMO. Depois, pense na ordem: primeiro encontrar o NPC, depois reiniciar e, por fim, mostrar.",
             launcher: "Tela de código do Ben",
             readyEvent: "kat:challenge-1-ready",
             collectAdminFile: true,
@@ -22,42 +23,47 @@
         },
         {
             title: "A ferramenta do Célio",
-            concept: "Aritmética e parâmetros",
-            intro: "Célio oferece um script para liberar a ferramenta de reparo. Calcule a força necessária e passe a porta e a força como parâmetros do comando.",
-            feedback: "Certo! Você calculou o parâmetro e passou os valores na ordem que o comando espera.",
+            concept: "Parâmetros e funções",
+            intro: "Uma função é um bloco de código com nome que pode ser reaproveitado. O parâmetro é o dado que você entrega a ela. Célio precisa reparar a PORTA e a FERRAMENTA: escreva a função REPARAR uma vez e chame-a para cada alvo.",
+            feedback: "Certo! Você escreveu a função uma vez e a reaproveitou, mudando só o parâmetro.",
             mode: "fill",
             template: [
+                "FUNCAO REPARAR(alvo)",
+                { label: "    DESBLOQUEAR(", answer: "alvo", suffix: ")", options: ["PORTA", "alvo", "REPARAR"] },
+                "    TESTAR(alvo)",
+                "FIM_FUNCAO",
+                "",
                 "INICIO",
-                "forca_base <- 3",
-                "bonus <- 2",
-                { label: "forca_total <- forca_base ", answer: "+", suffix: " bonus", options: ["+", "-", "*"] },
-                { label: "ABRIR(", answer: "PORTA, forca_total", suffix: ")", options: ["PORTA, forca_total", "forca_total, PORTA", "LUZ, forca_base"] },
+                { label: "    REPARAR(", answer: "PORTA", suffix: ")", options: ["PORTA", "alvo", "FUNCAO"] },
+                { label: "    ", answer: "REPARAR(FERRAMENTA)", options: ["REPARAR()", "FUNCAO REPARAR(FERRAMENTA)", "REPARAR(FERRAMENTA)"] },
                 "FIM"
             ],
-            effect: "Célio restaurou a ferramenta!",
-            hint: "Some a força base ao bônus e chame ABRIR com PORTA primeiro e forca_total depois.",
+            effect: "Célio restaurou a porta e a ferramenta!",
+            hint: "Dentro da função, use o parâmetro alvo. Fora dela, chame REPARAR passando o objeto entre parênteses: primeiro PORTA, depois FERRAMENTA.",
             readyEvent: "kat:challenge-2-ready",
             nextPage: "garden.html"
         },
         {
             title: "Limpar os glitches do Jardim",
-            concept: "Operadores aritméticos e lógicos",
-            intro: "Os glitches corromperam o Jardim. Calcule quantos ainda restam com -, depois use E para combinar a condição dos glitches com a energia. Só então o script poderá removê-los.",
-            feedback: "Boa! A subtração calculou o que falta e E exigiu que as duas condições fossem verdadeiras.",
+            concept: "Operadores aritméticos, relacionais e lógicos",
+            intro: "Operadores aritméticos fazem contas (+ - * /), relacionais comparam valores (> < == >=) e lógicos juntam condições (E, OU, NÃO). Use um de cada para descobrir se ainda há glitches e se há energia para removê-los.",
+            feedback: "Boa! A subtração fez a conta, o > comparou e o E exigiu as duas condições verdadeiras.",
             mode: "fill",
             template: [
-                "SCRIPT DO JARDIM",
-                "total_glitches <- 8",
-                "glitches_removidos <- 5",
-                { label: "glitches_pendentes <- ", answer: "total_glitches - glitches_removidos", options: ["total_glitches + glitches_removidos", "total_glitches - glitches_removidos", "total_glitches / glitches_removidos"] },
-                "energia <- 3",
-                { label: "SE glitches_pendentes > 0 ", answer: "E", suffix: " energia >= 1 ENTÃO", options: ["E", "OU", "NÃO"] },
-                { label: "    energia <- energia ", answer: "-", suffix: " 1", options: ["+", "-", "*"] },
-                { label: "    EXECUTAR(", answer: "REMOVER_GLITCHS", suffix: ")", options: ["REPARAR_PONTE", "REMOVER_GLITCHS", "ATIVAR_PORTAL"] },
-                "FIM_SE"
+                "ALGORITMO \"limpar_jardim\"",
+                "INICIO",
+                "    total_glitches <- 8",
+                "    removidos <- 5",
+                { label: "    restantes <- total_glitches ", answer: "-", suffix: " removidos", options: ["+", "-", "*"] },
+                { label: "    tem_glitch <- restantes ", answer: ">", suffix: " 0", options: ["<", "==", ">"] },
+                "    tem_energia <- energia >= 1",
+                { label: "    SE tem_glitch ", answer: "E", suffix: " tem_energia ENTÃO", options: ["E", "OU", "NÃO"] },
+                "        EXECUTAR(REMOVER_GLITCHS)",
+                "    FIM_SE",
+                "FIMALGORITMO"
             ],
             effect: "Os glitches sumiram e o primeiro arquivo ficou visível.",
-            hint: "Subtraia os glitches já removidos do total. Na condição, E só é verdadeiro se ainda houver glitches e energia suficiente; depois, subtraia 1 da energia.",
+            hint: "Restantes = total menos removidos. Há glitch quando restantes é maior que 0. E só é verdadeiro quando as duas condições são verdadeiras.",
             runLabel: "EXECUTAR SCRIPT",
             launcher: "Executar script do Jardim",
             readyEvent: "kat:challenge-3-ready",
@@ -66,150 +72,176 @@
         },
         {
             title: "A regra da Piona",
-            concept: "Operador lógico OU",
-            intro: "Piona pode abrir o portal se o fragmento foi encontrado ou se Ben trouxe uma autorização. Complete a condição para que qualquer uma dessas opções seja suficiente.",
-            feedback: "Isso! Com OU, basta uma das duas condições ser verdadeira.",
+            concept: "Se / Senão",
+            intro: "Com SE o programa toma uma decisão: se a condição for verdadeira, faz uma coisa; SENÃO, faz outra. Piona só libera o portal se o primeiro fragmento foi coletado; caso contrário, mostra uma dica.",
+            feedback: "Isso! O SE escolheu o caminho certo e o SENÃO ficou como plano B.",
             effect: "Fragmento confirmado. O portal para o Refúgio foi liberado.",
-            hint: "Use OU: o portal deve abrir quando o fragmento foi encontrado ou quando Ben está autorizado.",
+            hint: "Quando o fragmento foi coletado, a ação é LIBERAR_PORTAL. O caminho alternativo começa com SENÃO.",
             mode: "fill",
             template: [
-                "fragmento_1_coletado <- VERDADEIRO",
-                "ben_autorizado <- FALSO",
-                { label: "SE fragmento_1_coletado == VERDADEIRO ", answer: "OU", suffix: " ben_autorizado == VERDADEIRO ENTÃO", options: ["E", "OU", "NÃO"] },
-                { label: "    ", answer: "LIBERAR_PORTAL", options: ["LIBERAR_PORTAL", "OCULTAR_PORTAL", "EXECUTAR_SAIDA"] },
-                "FIM_SE"
+                "ALGORITMO \"portal_da_piona\"",
+                "INICIO",
+                "    fragmento_coletado <- VERDADEIRO",
+                "    SE fragmento_coletado ENTÃO",
+                { label: "        ", answer: "LIBERAR_PORTAL", options: ["MOSTRAR_DICA", "LIBERAR_PORTAL", "OCULTAR_PORTAL"] },
+                { label: "    ", answer: "SENÃO", options: ["ENTÃO", "FIM_SE", "SENÃO"] },
+                "        MOSTRAR_DICA",
+                "    FIM_SE",
+                "FIMALGORITMO"
             ],
             readyEvent: "kat:challenge-4-ready",
             nextPage: "refuge.html"
         },
         {
             title: "O objeto invisível",
-            concept: "Depuração e atribuição",
-            intro: "No Refúgio, Ben encontra uma atribuição incorreta que mantém o arquivo oculto. Corrija o valor da variável e execute o comando que o revela, sem adicionar uma condição.",
-            feedback: "Encontrou o erro! Corrigiu o valor e executou a ação necessária.",
+            concept: "Depuração",
+            intro: "Depurar é encontrar e corrigir erros (bugs) sem reescrever tudo. Este programa deveria revelar o arquivo, mas ele continua oculto. As partes em vermelho estão com bug: troque cada uma pela versão correta.",
+            instructions: "Encontre as linhas com bug, escolha a correção e execute.",
+            feedback: "Encontrou os bugs! Você corrigiu só o necessário, sem começar do zero.",
             mode: "fill",
             template: [
+                "ALGORITMO \"revelar_arquivo\"",
                 "INICIO",
-                "arquivo_visivel <- FALSO",
-                { label: "arquivo_visivel <- ", answer: "VERDADEIRO", options: ["FALSO", "VERDADEIRO", "VAZIO"] },
-                { label: "    ", answer: "MOSTRAR_ARQUIVO()", options: ["OCULTAR_ARQUIVO()", "MOSTRAR_ARQUIVO()", "APAGAR_ARQUIVO()"] },
-                "FIM"
+                "    LOCALIZAR_ARQUIVO",
+                { label: "    arquivo_visivel <- ", answer: "VERDADEIRO", bug: "FALSO", options: ["FALSO", "VERDADEIRO", "VAZIO"] },
+                "    SE arquivo_visivel == VERDADEIRO ENTÃO",
+                { label: "        ", answer: "MOSTRAR_ARQUIVO", bug: "OCULTAR_ARQUIVO", options: ["OCULTAR_ARQUIVO", "MOSTRAR_ARQUIVO", "APAGAR_ARQUIVO"] },
+                "    FIM_SE",
+                "FIMALGORITMO"
             ],
             effect: "O objeto escondido apareceu!",
-            hint: "Altere arquivo_visivel para VERDADEIRO e use MOSTRAR_ARQUIVO() para revelar o arquivo.",
+            hint: "Para o SE ser verdadeiro, arquivo_visivel precisa valer VERDADEIRO. E, dentro do SE, a ação deve mostrar o arquivo, não escondê-lo.",
             readyEvent: "kat:challenge-5-ready",
             collectFragment: true,
             nextPage: "laboratorio.html"
         },
         {
             title: "O teletransporte repetitivo",
-            concept: "Laços e contadores",
-            intro: "Ben encontra a extensão de teletransporte. Use um laço ENQUANTO com quatro iterações e atualize o contador a cada passagem.",
-            feedback: "Certo! O laço controla quantas vezes a ação é repetida.",
+            concept: "Laços de repetição",
+            intro: "Um laço repete instruções sem precisar escrevê-las várias vezes. O script antigo tinha TELETRANSPORTAR escrito 4 vezes seguidas. Troque tudo por um laço PARA que repita o comando 4 vezes.",
+            feedback: "Certo! Uma linha dentro do laço fez o trabalho de quatro.",
             mode: "fill",
             template: [
+                "ALGORITMO \"teletransporte\"",
                 "INICIO",
-                "contador <- 0",
-                "ENQUANTO contador < 4 FACA",
-                "    TELETRANSPORTAR",
-                { label: "    contador <- contador ", answer: "+ 1", options: ["+ 1", "- 1", "* 1"] },
-                "FIM_ENQUANTO",
-                "FIM"
+                { label: "    PARA i DE 1 ATE ", answer: "4", suffix: " FACA", options: ["1", "4", "8"] },
+                { label: "        ", answer: "TELETRANSPORTAR", options: ["TELETRANSPORTAR", "FIM_PARA", "PARA"] },
+                { label: "    ", answer: "FIM_PARA", options: ["FIM_SE", "FIM_PARA", "FIMALGORITMO"] },
+                "FIMALGORITMO"
             ],
             effect: "O teletransporte foi ajustado!",
-            hint: "O laço precisa chegar a 4 e somar 1 ao contador em cada repetição.",
+            hint: "O laço deve ir de 1 até 4. Dentro dele fica só a ação que se repete, e todo PARA termina com FIM_PARA.",
             readyEvent: "kat:challenge-6-ready",
             collectFragment: true,
             nextPage: "teleport.html"
         },
         {
             title: "O sinal correto",
-            concept: "Resto da divisão",
-            intro: "A extensão está funcionando. As plataformas são numeradas pelo resto da energia dividida por 3; calcule o resto e use o resultado para selecionar a plataforma.",
-            feedback: "Correto! MOD calculou o resto e a extensão recebeu o número da plataforma.",
+            concept: "Condicionais avançadas",
+            intro: "Quando há mais de dois caminhos, use SE, SENÃO SE e SENÃO. Há três plataformas: vermelha, verde e azul. O teletransporte só pode usar a plataforma cujo sinal é VERDE e só se houver energia.",
+            feedback: "Correto! O programa testou cada caso em ordem e escolheu a plataforma verde.",
             mode: "fill",
             template: [
-                "energia <- 10",
-                { label: "plataforma <- MOD(energia, ", answer: "3", suffix: ")", options: ["2", "3", "4"] },
-                { label: "TELETRANSPORTAR(", answer: "plataforma", suffix: ")", options: ["energia", "plataforma", "3"] }
+                "ALGORITMO \"escolher_plataforma\"",
+                "INICIO",
+                "    sinal <- VERDE",
+                "    energia <- 2",
+                "    SE sinal == VERMELHO ENTÃO",
+                "        MOSTRAR_DICA",
+                { label: "    SENÃO SE sinal ", answer: "==", suffix: " VERDE E energia >= 1 ENTÃO", options: ["!=", "==", "<-"] },
+                { label: "        TELETRANSPORTAR(", answer: "PLATAFORMA_VERDE", suffix: ")", options: ["PLATAFORMA_VERMELHA", "PLATAFORMA_VERDE", "PLATAFORMA_AZUL"] },
+                { label: "    ", answer: "SENÃO", options: ["SENÃO", "ENTÃO", "SE"] },
+                "        AGUARDAR_ENERGIA",
+                "    FIM_SE",
+                "FIMALGORITMO"
             ],
             effect: "A plataforma verde foi ativada!",
-            hint: "MOD(10, 3) resulta em 1. Passe a variável plataforma para TELETRANSPORTAR.",
+            hint: "Para comparar use == (o <- guarda valores). A plataforma precisa ser a VERDE, e o último caso, que pega todo o resto, é o SENÃO.",
             readyEvent: "kat:challenge-7-ready",
             collectFragment: true,
             nextPage: "deepstrech.html"
         },
         {
             title: "Os quatro fragmentos",
-            concept: "Vetores, laços e validação",
-            intro: "Você trouxe os quatro arquivos criptografados para Piona. Percorra o vetor de fragmentos, insira apenas os que não estão vazios e execute o programa depois do laço.",
-            feedback: "Os fragmentos foram percorridos e validados na ordem correta.",
+            concept: "Algoritmo completo",
+            intro: "Hora de juntar as peças! Você trouxe os quatro arquivos para Piona. Monte o programa de saída: nomeie o algoritmo, insira cada fragmento com um laço e só execute se todos estiverem válidos.",
+            feedback: "Você juntou sequência, laço e condição num programa completo. Isso merece comemoração!",
             mode: "fill",
             template: [
+                { label: "", answer: "ALGORITMO", suffix: " \"programa_de_saida\"", options: ["FUNCAO", "ALGORITMO", "PARA"] },
                 "INICIO",
-                "LIGAR_TERMINAL",
-                "PARA indice DE 1 ATE 4 FACA",
-                { label: "    ", answer: "INSERIR_CODIGO(fragmentos[indice])", options: ["INSERIR_CODIGO(fragmentos[indice])", "APAGAR_CODIGO(fragmentos[indice])", "EXECUTAR_PROGRAMA()"] },
-                "FIM_PARA",
-                "EXECUTAR_PROGRAMA()",
-                "FIM"
+                "    LIGAR_TERMINAL",
+                "    PARA i DE 1 ATE 4 FACA",
+                { label: "        ", answer: "INSERIR_CODIGO(fragmentos[i])", options: ["INSERIR_CODIGO(fragmentos[i])", "APAGAR_CODIGO(fragmentos[i])", "EXECUTAR_PROGRAMA()"] },
+                "    FIM_PARA",
+                { label: "    SE fragmentos_validos == ", answer: "4", suffix: " ENTÃO", options: ["0", "1", "4"] },
+                "        EXECUTAR_PROGRAMA()",
+                "    FIM_SE",
+                "FIMALGORITMO"
             ],
             effect: "Os quatro fragmentos formaram o programa!",
-            hint: "Como os quatro arquivos já foram coletados, percorra as posições de 1 a 4 e insira cada fragmento antes de executar o programa.",
+            hint: "Todo programa começa com ALGORITMO. Dentro do laço, insira o fragmento da posição i. O programa só roda quando os 4 fragmentos são válidos.",
             requiresAllFiles: true,
+            celebrate: true,
             readyEvent: "kat:challenge-8-ready",
             nextPage: "binary-room.html"
         },
         {
             title: "O último erro",
-            concept: "Condições compostas e retorno lógico",
-            intro: "De volta à Sala Binária, Chromicos encontra uma falha na validação. Só valide com os quatro arquivos e o código pronto; execute a saída apenas se a validação retornar verdadeiro.",
-            feedback: "Algoritmo corrigido! A saída só executa quando as duas verificações passam.",
+            concept: "Se e então dentro de laços",
+            intro: "Um laço também pode depender de uma condição. Chromicos quer conferir os 4 arquivos um por um: ENQUANTO ainda houver arquivo para ver, SE ele estiver corrompido, ENTÃO repare. No fim, execute a saída.",
+            feedback: "Algoritmo corrigido! O laço passou por cada arquivo e o SE reparou só os que precisavam.",
             mode: "fill",
             template: [
-                "codigo_pronto <- VERDADEIRO",
-                "arquivos_validos <- 4",
-                { label: "SE codigo_pronto == VERDADEIRO ", answer: "E", suffix: " arquivos_validos == 4 ENTÃO", options: ["E", "OU", "NÃO"] },
-                "    validacao_ok <- VALIDAR_CODIGO()",
-                { label: "    SE validacao_ok == ", answer: "VERDADEIRO", suffix: " ENTÃO", options: ["VERDADEIRO", "FALSO", "VAZIO"] },
-                "        EXECUTAR_SAIDA",
-                "    FIM_SE",
-                "FIM_SE"
+                "ALGORITMO \"conferir_arquivos\"",
+                "INICIO",
+                "    arquivo <- 1",
+                { label: "    ENQUANTO arquivo ", answer: "<=", suffix: " 4 FACA", options: ["<=", ">", "=="] },
+                "        SE CORROMPIDO(arquivo) ENTÃO",
+                { label: "            ", answer: "REPARAR(arquivo)", options: ["APAGAR(arquivo)", "REPARAR(arquivo)", "EXECUTAR_SAIDA"] },
+                "        FIM_SE",
+                { label: "        arquivo <- arquivo ", answer: "+ 1", options: ["- 1", "* 1", "+ 1"] },
+                "    FIM_ENQUANTO",
+                "    EXECUTAR_SAIDA",
+                "FIMALGORITMO"
             ],
             effect: "O acesso ao terminal final foi liberado!",
-            hint: "Use E para exigir código pronto e quatro arquivos; depois, teste se validacao_ok é VERDADEIRO.",
+            hint: "O laço continua enquanto arquivo for menor ou igual a 4. Repare o arquivo corrompido e some 1 para passar ao próximo; senão o laço nunca termina.",
             readyEvent: "kat:challenge-9-ready",
             nextPage: "final-commit.html"
         },
         {
             title: "FINALCOMMIT",
-            concept: "Algoritmo completo: lógica, laços e validação",
-            intro: "Chromicos abre o terminal. Complete o algoritmo final: combine os pré-requisitos, repare o caminho duas vezes e só execute a saída após validar o código.",
+            concept: "Desafio final: funções, condições e laços",
+            intro: "Chromicos abre o terminal. Este é o algoritmo mais completo: a função ABRIR_SAIDA valida e executa a saída. Se o sinal estiver verde e houver energia, repare o caminho duas vezes e chame a função; senão, mostre uma dica.",
             feedback: "Código correto! A saída foi ativada.",
             mode: "fill",
             template: [
+                "ALGORITMO \"final_commit\"",
+                "",
+                "FUNCAO ABRIR_SAIDA()",
+                "    VALIDAR_CODIGO",
+                "    EXECUTAR_SAIDA",
+                "FIM_FUNCAO",
+                "",
                 "INICIO",
-                "LIGAR_TERMINAL",
-                "sinal <- VERDE",
-                "energia <- 2",
-                { label: "SE sinal == VERDE ", answer: "E", suffix: " energia >= 2 ENTÃO", options: ["E", "OU", "NÃO"] },
-                "    REPETIR 2 VEZES:",
-                { label: "        ", answer: "REPARAR_CAMINHO", options: ["REPARAR_CAMINHO", "EXECUTAR_SAIDA", "MOSTRAR_DICA"] },
-                "    FIM_REPETIR",
-                "    codigo_ok <- VALIDAR_CODIGO()",
-                { label: "    SE codigo_ok == ", answer: "VERDADEIRO", suffix: " ENTÃO", options: ["VERDADEIRO", "FALSO", "VAZIO"] },
-                "        EXECUTAR_SAIDA",
-                "    SENÃO",
-                "        MOSTRAR_DICA",
+                "    LIGAR_TERMINAL",
+                "    sinal <- VERDE",
+                "    energia <- 2",
+                { label: "    SE sinal == VERDE ", answer: "E", suffix: " energia >= 2 ENTÃO", options: ["E", "OU", "NÃO"] },
+                "        PARA i DE 1 ATE 2 FACA",
+                { label: "            ", answer: "REPARAR_CAMINHO", options: ["EXECUTAR_SAIDA", "REPARAR_CAMINHO", "MOSTRAR_DICA"] },
+                "        FIM_PARA",
+                { label: "        ", answer: "ABRIR_SAIDA()", options: ["FUNCAO ABRIR_SAIDA()", "FIM_FUNCAO", "ABRIR_SAIDA()"] },
+                { label: "    ", answer: "SENÃO", options: ["SENÃO", "FIM_PARA", "ENTÃO"] },
+                "        MOSTRAR_DICA(\"Verifique o sinal!\")",
                 "    FIM_SE",
-                "SENÃO",
-                "    MOSTRAR_DICA",
-                "FIM_SE",
-                "FIM"
+                "FIMALGORITMO"
             ],
             effect: "O terminal abriu a saída!",
-            hint: "Use E nos dois pré-requisitos, repare dentro do laço e execute a saída somente quando codigo_ok for VERDADEIRO.",
+            hint: "As duas condições precisam ser verdadeiras (E). Repare o caminho dentro do laço, chame a função pelo nome com () e use SENÃO para o caminho alternativo.",
             requiresAllFiles: true,
+            celebrate: true,
             readyEvent: "kat:challenge-10-ready",
             ending: true
         }
@@ -358,6 +390,33 @@
         return true;
     }
 
+    function solvedProgram() {
+        return currentChallenge.template.map((line) => typeof line === "string"
+            ? line
+            : `${line.label}${line.answer}${line.suffix || ""}`);
+    }
+
+    function celebrate() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            return;
+        }
+        const layer = document.createElement("div");
+        layer.className = "challenge-confetti";
+        layer.setAttribute("aria-hidden", "true");
+        const colors = ["#54a96c", "#4388c1", "#f2c14e", "#b63c58", "#ffffff"];
+        for (let i = 0; i < 80; i += 1) {
+            const piece = document.createElement("i");
+            piece.style.left = `${Math.random() * 100}%`;
+            piece.style.background = colors[i % colors.length];
+            piece.style.animationDelay = `${Math.random() * 0.8}s`;
+            piece.style.animationDuration = `${2.2 + Math.random() * 1.6}s`;
+            piece.style.setProperty("--drift", `${(Math.random() - 0.5) * 160}px`);
+            layer.appendChild(piece);
+        }
+        document.body.appendChild(layer);
+        window.setTimeout(() => layer.remove(), 4800);
+    }
+
     function markComplete() {
         if (completed.includes(currentChallengeId)) {
             return;
@@ -388,31 +447,15 @@
         stage.querySelectorAll("button, input").forEach((button) => {
             button.disabled = true;
         });
+        if (currentChallenge.celebrate) {
+            celebrate();
+        }
         if (currentChallenge.ending) {
             if (!window.finalTerminal || typeof window.finalTerminal.run !== "function") {
                 throw new Error("The final program terminal is not available.");
             }
             overlay.hidden = true;
-            window.finalTerminal.run([
-                "INICIO",
-                "LIGAR_TERMINAL",
-                "sinal <- VERDE",
-                "energia <- 2",
-                "SE sinal == VERDE E energia >= 2 ENTÃO",
-                "    REPETIR 2 VEZES:",
-                "        REPARAR_CAMINHO",
-                "    FIM_REPETIR",
-                "    codigo_ok <- VALIDAR_CODIGO()",
-                "    SE codigo_ok == VERDADEIRO ENTÃO",
-                "        EXECUTAR_SAIDA",
-                "    SENÃO",
-                "        MOSTRAR_DICA",
-                "    FIM_SE",
-                    "SENÃO",
-                "    MOSTRAR_DICA",
-                "FIM_SE",
-                "FIM"
-            ]).then(showEnding).catch((error) => {
+            window.finalTerminal.run(solvedProgram().filter((line) => line.trim() !== "")).then(showEnding).catch((error) => {
                 console.error("Failed to execute the final program.", error);
             });
             return;
@@ -462,9 +505,9 @@ function showEnding() {
         const characters = document.querySelectorAll(".character, .npc");
         
         const developerNames = [
+            "LETÍCIA (INSTRUTORA - SENAI)",
             "EZEQUIEL",
             "YASMIN",
-            "LETICIA",
             "GABRIEL"
         ];
         developerNames.forEach((name) => {
@@ -677,14 +720,24 @@ function showEnding() {
         currentChallenge.template.forEach((line) => {
             const row = document.createElement("div");
             row.className = "challenge-fill-line";
+            const source = typeof line === "string" ? line : line.label;
+            const indent = source.length - source.trimStart().length;
+            if (indent > 0) {
+                row.style.paddingLeft = `${indent}ch`;
+            }
             if (typeof line === "string") {
-                window.katCodeHighlighter.render(row, line);
+                const text = document.createElement("span");
+                window.katCodeHighlighter.render(text, line.trimStart());
+                row.appendChild(text);
             } else {
                 const label = document.createElement("span");
-                window.katCodeHighlighter.render(label, line.label);
+                window.katCodeHighlighter.render(label, line.label.trimStart());
                 const gap = document.createElement("span");
                 gap.className = "challenge-code-gap";
-                window.katCodeHighlighter.render(gap, "ESCOLHA UMA OPÇÃO");
+                window.katCodeHighlighter.render(gap, line.bug || "ESCOLHA UMA OPÇÃO");
+                if (line.bug) {
+                    gap.classList.add("is-bug");
+                }
                 gap.setAttribute("aria-live", "polite");
                 const selection = { line, value: "", gap };
                 gaps.push(selection);
@@ -709,7 +762,7 @@ function showEnding() {
                     input.addEventListener("change", () => {
                         selection.value = option;
                         window.katCodeHighlighter.render(gap, option);
-                        gap.classList.remove("is-empty", "is-wrong");
+                        gap.classList.remove("is-empty", "is-wrong", "is-bug");
                         feedback.textContent = "";
                         feedback.className = "challenge-feedback";
                         choiceLabel.parentElement.querySelectorAll(".challenge-choice")
@@ -755,19 +808,27 @@ function showEnding() {
         stage.appendChild(runButton);
     }
 
-    instructions.textContent = "Complete somente as lacunas do código e execute.";
+    instructions.textContent = currentChallenge.instructions || "Complete somente as lacunas do código e execute.";
     renderFill();
 
     launcher.addEventListener("click", openChallenge);
     if (currentChallenge.readyEvent) {
-        document.addEventListener(currentChallenge.readyEvent, () => {
+        const onReady = () => {
+            if (challengeReady) {
+                return;
+            }
             challengeReady = true;
             if (adminRecoveryRequired || completed.includes(currentChallengeId)) {
                 return;
             }
             launcher.hidden = false;
             openChallenge();
-        }, { once: true });
+        };
+        document.addEventListener(currentChallenge.readyEvent, onReady, { once: true });
+        // O aviso pode ter sido disparado antes deste script carregar.
+        if (window.katFiredReadyEvents && window.katFiredReadyEvents.has(currentChallenge.readyEvent)) {
+            onReady();
+        }
     }
     document.addEventListener("kat:admin-access-lost", () => {
         adminRecoveryRequired = true;

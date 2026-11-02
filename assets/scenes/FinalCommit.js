@@ -11,19 +11,36 @@ chromicos.register_character("Chromicos", "chromicos", true, true);
 framer.set_character_main_scene(gato);
 framer.set_controls_to_character();
 framer.register_characters(assets.get("have-ben") ? [gato, ben, chromicos] : [gato, chromicos]);
-gato.set_position(Math.max(80, window.innerWidth * 0.34), Math.max(150, window.innerHeight * 0.58));
-if (assets.get("have-ben")) {
-    ben.set_position(Math.max(160, window.innerWidth * 0.45), Math.max(150, window.innerHeight * 0.58));
-    framer.character_follow_main_character(ben);
+// Em telas largas o terminal fica à direita e os personagens na faixa livre à esquerda;
+// em telas estreitas o terminal fica em cima e os personagens embaixo.
+const sideLayout = window.innerWidth >= 760;
+const terminalWidth = Math.min(760, Math.max(420, window.innerWidth * 0.54));
+const freeWidth = window.innerWidth - terminalWidth - 32;
+const chromicosSize = sideLayout ? Math.min(220, Math.max(150, freeWidth - 200)) : 140;
+chromicos.character_dom.style.height = `${chromicosSize}px`;
+chromicos.character_dom.style.width = `${chromicosSize}px`;
+if (sideLayout) {
+    const startX = 190;
+    chromicos.set_position(startX + Math.max(0, (freeWidth - startX - chromicosSize) / 2), Math.max(150, window.innerHeight * 0.2));
+    gato.set_position(startX, Math.max(330, window.innerHeight * 0.6));
+    if (assets.get("have-ben")) {
+        ben.set_position(startX + 100, Math.max(330, window.innerHeight * 0.6));
+        framer.character_follow_main_character(ben);
+    }
+} else {
+    gato.set_position(window.innerWidth * 0.12, window.innerHeight * 0.66);
+    if (assets.get("have-ben")) {
+        ben.set_position(window.innerWidth * 0.36, window.innerHeight * 0.66);
+        framer.character_follow_main_character(ben);
+    }
+    chromicos.set_position(window.innerWidth - chromicosSize - 12, window.innerHeight * 0.62);
 }
-chromicos.set_position(Math.max(240, window.innerWidth * 0.62), Math.max(150, window.innerHeight * 0.58));
 
-chromicos.character_dom.style.height = "250px";
-chromicos.character_dom.style.width = "250px";
 scene.enable_character_movement();
 
 const terminal = document.createElement("div");
-terminal.className = "final-terminal";
+terminal.className = sideLayout ? "final-terminal is-side" : "final-terminal";
+terminal.style.setProperty("--terminal-width", `${terminalWidth}px`);
 terminal.setAttribute("aria-label", "Terminal de execução final");
 terminal.innerHTML = `
     <header class="final-terminal-header">
@@ -59,6 +76,7 @@ window.finalTerminal = {
             line.className = "final-terminal-line";
             window.katCodeHighlighter.render(line, lines[index]);
             terminalCode.appendChild(line);
+            terminalCode.parentElement.scrollTop = terminalCode.parentElement.scrollHeight;
             terminalProgress.style.width = `${Math.round(((index + 1) / lines.length) * 100)}%`;
             terminalStatus.textContent = `EXECUTANDO ${index + 1}/${lines.length}`;
             if (window.katSound) {

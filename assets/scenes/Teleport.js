@@ -93,7 +93,7 @@ window.katQuestFollowUp({
         {
             from: ben,
             to: gato,
-            about: "Isso! O resto da divisão indicou o bit correto, e o teletransporte foi ativado."
+            about: "Isso! O SENÃO SE testou o sinal verde e o teletransporte foi ativado."
         },
         {
             from: ben,

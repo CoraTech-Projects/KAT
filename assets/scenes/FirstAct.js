@@ -236,7 +236,7 @@ scene.create_scene("gato_fala4", {
 
         localStorage.setItem("assets", "{}");
         assets.save("started", true);
-        window.location.href = "/refuge.html";
+        window.location.href = "refuge.html";
     },
     disableControls: true
 });

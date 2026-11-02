@@ -117,7 +117,7 @@ scene.create_scene("garden-arrival", {
         {
             from: ben,
             to: gato,
-            about: "A ferramenta que Célio nos vendeu pode executar este script. Calcule os glitches que ainda restam e confirme as condições de energia antes de removê-los."
+            about: "A ferramenta que Célio nos vendeu pode executar este script. Use um operador para fazer a conta, outro para comparar e outro para juntar as condições."
         },
         {
             from: gato,
@@ -170,7 +170,7 @@ window.katQuestFollowUp({
         {
             from: ben,
             to: gato,
-            about: "Ótimo! A conta mostrou quantos glitches restavam, e a condição confirmou que havia energia suficiente."
+            about: "Ótimo! O - fez a conta, o > comparou e o E juntou as duas condições."
         },
         {
             from: ben,

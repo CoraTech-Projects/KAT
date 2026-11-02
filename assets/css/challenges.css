@@ -906,3 +906,102 @@ body.fade-to-white * {
         opacity: 1;
     }
 }
+
+.challenge-code-gap.is-bug {
+    color: #ffb1b1;
+    border: 2px solid #ff8585;
+    background: #48212e;
+    text-decoration: underline wavy #ff8585;
+    text-underline-offset: 4px;
+}
+
+.challenge-fill-line:has(> span:only-child:empty) {
+    min-height: 1em;
+}
+
+.challenge-confetti {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.challenge-confetti i {
+    position: absolute;
+    top: -20px;
+    width: 10px;
+    height: 16px;
+    animation-name: challenge-confetti-fall;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes challenge-confetti-fall {
+    to {
+        transform: translate(var(--drift, 0), 110vh) rotate(720deg);
+    }
+}
+
+/* Terminal final ao lado dos personagens (telas largas) */
+.final-terminal.is-side {
+    top: 76px;
+    right: 16px;
+    bottom: 16px;
+    left: auto;
+    display: flex;
+    flex-direction: column;
+    width: var(--terminal-width, 54vw);
+    min-height: 0;
+    padding: clamp(14px, 2vw, 24px);
+    transform: none;
+    font-size: clamp(14px, 1.4vw, 18px);
+}
+
+.final-terminal.is-side .final-terminal-header {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.final-terminal.is-side .final-terminal-code {
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+    margin: 14px 0 10px;
+    padding: 12px 14px;
+    font-size: clamp(12px, 1.25vw, 16px);
+    line-height: 1.55;
+}
+
+.final-terminal.is-side .final-terminal-line {
+    min-height: 1.55em;
+}
+
+.final-terminal.is-side .final-terminal-output {
+    margin-bottom: 10px;
+}
+
+
+/* Terminal final em telas estreitas: em cima, com os personagens embaixo */
+.final-terminal:not(.is-side) {
+    top: 110px;
+    min-height: 0;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.final-terminal:not(.is-side) .final-terminal-code {
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+    margin: 8px 0;
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+.final-terminal:not(.is-side) .final-terminal-output {
+    margin-bottom: 6px;
+    font-size: 13px;
+}

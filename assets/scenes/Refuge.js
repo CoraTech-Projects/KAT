@@ -124,7 +124,7 @@ if (assets.get("have-ben")) {
                     dialogs: [
                         { from: ben, to: gato, about: "Os moradores disseram que um arquivo aparece por um instante perto daqui e depois desaparece." },
                         { from: gato, to: ben, about: "Dá para encontrá-lo sem começar tudo de novo?" },
-                        { from: ben, to: gato, about: "Sim. Vou abrir a depuração; complete a linha que está fora de ordem e o arquivo ficará visível." }
+                        { from: ben, to: gato, about: "Sim. Vou abrir a depuração; encontre as linhas com bug e corrija só o que estiver errado." }
                     ],
                     afterItDoes: () => {
                         assets.save("refuge-debug-seen", true);
@@ -184,7 +184,7 @@ window.katQuestFollowUp({
         {
             from: ben,
             to: gato,
-            about: "Boa depuração! Você corrigiu a atribuição e o arquivo voltou a ficar visível."
+            about: "Boa depuração! Você achou os dois bugs e o arquivo voltou a ficar visível."
         },
         {
             from: ben,

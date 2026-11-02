@@ -238,7 +238,7 @@ window.katQuestFollowUp({
         {
             from: celio,
             to: gato,
-            about: "Muito bem! Você calculou a força e passou os parâmetros na ordem certa."
+            about: "Muito bem! Você escreveu a função REPARAR uma vez e a usou duas vezes, mudando só o parâmetro."
         },
         {
             from: celio,

@@ -125,7 +125,7 @@ scene.create_scene("wake-ben", {
     {
         from: ben,
         to: gato,
-        about: "Há um arquivo de administrador guardado no canto, mas o NPC está travado. Vou abrir a tela de código para você completar os comandos que faltam."
+        about: "Há um arquivo de administrador guardado no canto, mas o NPC está travado. Vou abrir a tela de código para você montar seu primeiro algoritmo: uma sequência de passos, em ordem, para resolver um problema."
     }
 ],
     afterItDoes: () => {
@@ -212,7 +212,7 @@ if (assets.get("have-ben")) {
                 endOn: "last-interaction",
                 dialogs: [
                     { from: chromicos, to: gato, about: "Parece que vocês reuniram os quatro fragmentos do programa, ele está quase finalizado agora." },
-                    { from: ben, to: gato, about: "Encontramos uma falha na ordem dos comandos. Complete a linha que executa a saída só depois da validação." },
+                    { from: ben, to: gato, about: "Alguns arquivos podem ter se corrompido no caminho. Vamos conferir um por um com um laço e reparar só os que precisarem." },
                     { from: chromicos, to: gato, about: "Revise com calma. Quando esse erro for corrigido, abrirei o terminal final." }
                 ],
                 afterItDoes: () => {
@@ -247,7 +247,7 @@ window.katQuestFollowUp({
         {
             from: ben,
             to: gato,
-            about: "Boa, Gato! Você reiniciou o NPC e o tornou visível usando a variável certa."
+            about: "Boa, Gato! Esse foi seu primeiro algoritmo: localizar, reiniciar e mostrar, exatamente nessa ordem."
         },
         {
             from: ben,
@@ -265,12 +265,12 @@ window.katQuestFollowUp({
         {
             from: chromicos,
             to: gato,
-            about: "A validação passou: o código está pronto e os quatro arquivos estão corretos."
+            about: "O laço conferiu os quatro arquivos e o SE reparou só os corrompidos."
         },
         {
             from: ben,
             to: gato,
-            about: "Você corrigiu a ordem da verificação. Agora o terminal final está liberado."
+            about: "Você uniu condição e repetição. Agora o terminal final está liberado."
         }
     ]
 });

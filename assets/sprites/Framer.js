@@ -71,7 +71,8 @@ class Framer {
 
         window.addEventListener('keyup', (event) => {
             keysPressed[event.code] = false;
-            keysJustPressed[event.code] = false;
+            // keysJustPressed é limpo no fim de cada quadro; não limpar aqui evita
+            // perder toques rápidos (tecla solta antes do próximo quadro).
         });
 
         let currentTop = this.characterPosition.top;

@@ -9,7 +9,7 @@
 Jogo educativo de lógica de programação feito em HTML, CSS e JavaScript puro.
 Roda direto no navegador, no computador ou no celular.
 
-**[▶ Jogar agora](https://gb65079.github.io/Gato/)**
+**[▶ Jogar agora](https://coratech-projects.github.io/KAT/)**
 
 </div>
 
